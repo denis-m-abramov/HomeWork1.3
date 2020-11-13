@@ -19,5 +19,23 @@ default:
     break
 }
 
-//При поиске необходимого инструмента в книге Усова наткнулся на данный пример и был приятно удивлен :D
+
+//Альтернативный вариант через enum
+
+enum LevelReadinessABC {
+    case a, b, c
+}
+
+let levelReadinessABC = LevelReadinessABC.b
+
+switch levelReadinessABC {
+case .a:
+    print("Выключить все электрические приборы")
+    fallthrough
+case .b:
+    print("Закрыть входные двери и окна")
+    fallthrough
+case .c:
+    print("Соблюдать спокойствие")
+}
 //: [Ранее: Задание 3](@previous)  |  задание 4 из 6  |  [Далее: Задание 5](@next)

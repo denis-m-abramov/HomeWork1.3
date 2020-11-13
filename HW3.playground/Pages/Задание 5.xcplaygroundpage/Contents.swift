@@ -17,28 +17,76 @@ import Foundation
  */
 //:The task 5.1
 
+//let codeNumber = +7         //код номера
+//let lengthNumber = 12      //длина номера
+//
+//switch lengthNumber {
+//case (1...11):
+//    print("Дополните номер на N символов")
+//case (13...):
+//    print("Сократите номер на N символов")
+//case 12 where codeNumber == +7:
+//    print("Номер российский")
+//default:
+//    print("Предупреждение!")
+//}
+
+//если бы было побольше времени, то попытался разобрать другой вариант, где необходимо ввести длину номера не типом числа, а типом строки, но как передать в кейс не понимаю на данный момент
+
 let codeNumber = +7         //код номера
-let lengthNumber = 12      //длина номера
+let lengthNumber = 12       //длина номера
 
 switch lengthNumber {
-case (1...11):
+case ..<lengthNumber:
     print("Дополните номер на N символов")
-case (13...):
+case (lengthNumber + 1)...:
     print("Сократите номер на N символов")
-case 12 where codeNumber == +7:
+case lengthNumber where codeNumber == +7:
     print("Номер российский")
 default:
     print("Предупреждение!")
 }
 
-//если бы было побольше времени, то попытался разобрать другой вариант, где необходимо ввести длину номера не типом числа, а типом строки, но как передать в кейс не понимаю на данный момент
+
+//Альтернативный вариант:
+
+let phoneNumber = "+79605002323"
+
+let russianPhoneNumberLength = 12
+let russianPhoneNumberPrefix = "+7"
+
+switch phoneNumber.count {
+case russianPhoneNumberLength where phoneNumber.starts(with: russianPhoneNumberPrefix):
+        print("Номер российский")
+    case ..<russianPhoneNumberLength:
+        print("Дополните строку на \(russianPhoneNumberLength - phoneNumber.count) символа(ов)")
+    case (russianPhoneNumberLength + 1)...:
+        print("Сократите строку на \(phoneNumber.count - russianPhoneNumberLength) символа(ов)")
+    default:
+        print("Предупреждение!")
+}
 //:The task 5.2
+
 if lengthNumber >= 1 && lengthNumber <= 11 {
     print("Дополните номер на N символов")
 } else if lengthNumber >= 13 {
     print("Сократите номер на N символов")
 } else if lengthNumber == 12 && codeNumber == +7 {
     print("Номер российский")
+} else {
+    print("Предупреждение!")
+}
+
+
+
+//Альтернативный вариант:
+
+if phoneNumber.count == russianPhoneNumberLength && phoneNumber.starts(with: russianPhoneNumberPrefix) {
+    print("Номер российский")
+} else if phoneNumber.count > russianPhoneNumberLength {
+    print("Сократите строку на \(phoneNumber.count - russianPhoneNumberLength) символа(ов)")
+} else if phoneNumber.count < russianPhoneNumberLength {
+    print("Дополните строку на \(russianPhoneNumberLength - phoneNumber.count) символа(ов)")
 } else {
     print("Предупреждение!")
 }

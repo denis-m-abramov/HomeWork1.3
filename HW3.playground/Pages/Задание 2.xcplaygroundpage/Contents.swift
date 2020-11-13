@@ -12,20 +12,23 @@ import Foundation
  */
 
 var userInputAge: String = "34e"
-var userAge = Int(userInputAge)
+var userAge: Int? = Int(userInputAge)
 print(userAge)
 
-//Value of optional type 'Int?' must be unwrapped to a value of type 'Int'
+/* если оставить var userAge: Int = Int(userInputAge), то будет ошибка:
+ Value of optional type 'Int?' must be unwrapped to a value of type 'Int',
+ потому что тип неопциональный (строка не может быть преобразована в число, если это невозможно (например, будет значение "34е"))
+ 
+ */
+
 /*:
  Теперь поменяйте тип `userAge` на `Int?`, и напечатайте значение `userAge`.  Почему значение `userAge` равно `nil`?  Ответьте в комментарии или внутри команды print.
  */
 
-userAge: Int? = userInputAge
+userAge = Int(userInputAge)
 print(userAge)
 
-/* Далее что-то пошло не так...Xcode:
-1) Consecutive statements on a line must be separated by ';' Insert ';'
-2) Expected expression  */
+/* Компилятор не смог извлечь целочисленное значение и поэтому присвоил значение nil  */
 
 /*:
  Теперь исправьте опечатку в значении `userInputAge`.  Что-нибудь в результатах вывода кажется вам неуместным?
@@ -34,20 +37,24 @@ print(userAge)
  */
 
 userInputAge = "34"
-print(userAge!)
+userAge = Int(userInputAge)
+print("1", userAge)  //вместо числа 34 получим опциональный тип
+print("2", userAge!)
 
 /*:
  Используйте привязку опционалов для извлечения `userAge`.  Если `userAge` содержит значение, выведите его в консоль.
  */
-if let value = userAge {
-    print(value)
+if let userAge = userAge {
+    print("3", userAge)
 }
 
 /*:
  Теперь снова эмулируйте опечатку и попробуйте вывести на консоль целочисленное значение переменной `userInputAge`, при помощи оператора "!". Какую ошибку вы получите? Почему?
  */
 userInputAge = "34e"
-print(userInputAge!)
+userAge = Int(userInputAge)
+print(userInputAge)
+print(Int(userInputAge)!)
 
 //Cannot force unwrap value of non-optional type 'String'
 
